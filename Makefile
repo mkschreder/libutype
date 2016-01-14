@@ -8,7 +8,7 @@ SOURCES=\
 	src/safe_list.c \
 	src/utils.c \
 	src/vlist.c 
-INSTALL_PREFIX:=/usr
+INSTALL_PREFIX:=$(DESTDIR)/usr/
 
 OBJECTS=$(addprefix $(BUILD_DIR)/,$(patsubst %.c,%.o,$(SOURCES)))
 
