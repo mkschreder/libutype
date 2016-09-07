@@ -38,7 +38,7 @@
 #define container_of(ptr, type, member)					\
 	({								\
 		const typeof(((type *) NULL)->member) *__mptr = (ptr);	\
-		(type *) ((void *) __mptr - offsetof(type, member));	\
+		(type *) (void*)((char *) __mptr - offsetof(type, member));	\
 	})
 #endif
 
