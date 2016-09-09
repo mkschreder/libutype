@@ -19,11 +19,10 @@
 #ifndef __LIBUBOX_UTILS_H
 #define __LIBUBOX_UTILS_H
 
-#include <sys/types.h>
-#include <sys/time.h>
+//#include <sys/types.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <time.h>
+#include <stdlib.h>
 
 /*
  * calloc_a(size_t len, [void **addr, size_t len,...], NULL)
@@ -75,6 +74,8 @@ extern int __BUILD_BUG_ON_CONDITION_FAILED;
 #include <sys/endian.h>
 #define bswap_32(x) bswap32(x)
 #define bswap_64(x) bswap64(x)
+#elif defined(__AVR)
+#define __BYTE_ORDER 1234
 #else
 #include <machine/endian.h>
 #define bswap_32(x) swap32(x)
@@ -173,13 +174,5 @@ static inline bool bitfield_test(unsigned long *bits, int bit)
 {
 	return !!(bits[bit / BITS_PER_LONG] & (1UL << (bit % BITS_PER_LONG)));
 }
-
-int b64_encode(const void *src, size_t src_len,
-	       void *dest, size_t dest_len);
-
-int b64_decode(const void *src, void *dest, size_t dest_len);
-
-#define B64_ENCODE_LEN(_len)	((((_len) + 2) / 3) * 4 + 1)
-#define B64_DECODE_LEN(_len)	(((_len) / 4) * 3 + 1)
 
 #endif
