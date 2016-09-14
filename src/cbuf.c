@@ -40,13 +40,6 @@ uint16_t cbuf_get(struct cbuf *self){
 	return self->buffer[self->tail]; 
 }
 
-uint8_t cbuf_put_isr(struct cbuf *self, uint8_t data){
-	if(((self)->head == (((self)->tail - 1) & ((self)->size - 1)))) return 0; 
-	self->head = (self->head + 1) & (self->size - 1); 
-	self->buffer[self->head] = data; 
-	return 1; 
-}
-
 uint8_t cbuf_put(struct cbuf *self, uint8_t data){
 	if(((self)->head == (((self)->tail - 1) & ((self)->size - 1)))) return 0; 
 	self->head = (self->head + 1) & (self->size - 1); 
