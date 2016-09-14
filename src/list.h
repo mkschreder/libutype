@@ -32,15 +32,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-#define	prefetch(x)
+#include "utils.h"
 
-#ifndef container_of
-#define container_of(ptr, type, member)					\
-	({								\
-		const typeof(((type *) NULL)->member) *__mptr = (ptr);	\
-		(type *) (void*)((char *) __mptr - offsetof(type, member));	\
-	})
-#endif
+#define	prefetch(x)
 
 struct list_head {
 	struct list_head *next;

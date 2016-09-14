@@ -37,6 +37,13 @@
 
 void *__calloc_a(size_t len, ...);
 
+#ifndef container_of
+#define container_of(ptr, type, member)					\
+	({								\
+		(type *) (void*)((char*) (ptr) - offsetof(type, member));	\
+	})
+#endif
+
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 #endif

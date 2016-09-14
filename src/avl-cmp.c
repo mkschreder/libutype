@@ -24,8 +24,8 @@ avl_strcmp(const void *k1, const void *k2, void *ptr)
 }
 
 int avl_intcmp(const void *k1, const void *k2, void *ptr){
-	const uint32_t *id1 = (uint32_t*)k1; 
-	const uint32_t *id2 = (uint32_t*)k2; 
+	const uint32_t *id1 = (const uint32_t*)k1; 
+	const uint32_t *id2 = (const uint32_t*)k2; 
 
 	if(*id1 < *id2) return -1; 
 	return *id1 > *id2; 

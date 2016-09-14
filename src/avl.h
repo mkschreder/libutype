@@ -282,7 +282,7 @@ __avl_find_element(const struct avl_tree *tree, const void *key, size_t offset, 
  *    (automatically converted to type 'element')
  */
 #define avl_first_element(tree, element, node_member) \
-  container_of((tree)->list_head.next, typeof(*(element)), node_member.list)
+  ({container_of((tree)->list_head.next, typeof(*(element)), node_member.list);})
 
 /**
  * @param tree pointer to tree
