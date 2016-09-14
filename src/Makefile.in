@@ -124,7 +124,7 @@ LTLIBRARIES = $(lib_LTLIBRARIES)
 libutype_la_LIBADD =
 am_libutype_la_OBJECTS = libutype_la-avl-cmp.lo libutype_la-avl.lo \
 	libutype_la-kvlist.lo libutype_la-safe_list.lo \
-	libutype_la-utils.lo libutype_la-vlist.lo
+	libutype_la-utils.lo libutype_la-vlist.lo libutype_la-cbuf.lo
 libutype_la_OBJECTS = $(am_libutype_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -320,7 +320,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 lib_LTLIBRARIES = libutype.la
 include_HEADERS = avl-cmp.h avl.h kvlist.h safe_list.h list.h utils.h vlist.h
-libutype_la_SOURCES = avl-cmp.c avl.c kvlist.c safe_list.c utils.c vlist.c 
+libutype_la_SOURCES = avl-cmp.c avl.c kvlist.c safe_list.c utils.c vlist.c cbuf.c
 libutype_la_CFLAGS = $(CODE_COVERAGE_CFLAGS) -std=gnu99 -Wall -Werror
 all: all-am
 
@@ -403,6 +403,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-avl-cmp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-avl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-cbuf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-kvlist.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-safe_list.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libutype_la-utils.Plo@am__quote@
@@ -470,6 +471,13 @@ libutype_la-vlist.lo: vlist.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='vlist.c' object='libutype_la-vlist.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libutype_la_CFLAGS) $(CFLAGS) -c -o libutype_la-vlist.lo `test -f 'vlist.c' || echo '$(srcdir)/'`vlist.c
+
+libutype_la-cbuf.lo: cbuf.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libutype_la_CFLAGS) $(CFLAGS) -MT libutype_la-cbuf.lo -MD -MP -MF $(DEPDIR)/libutype_la-cbuf.Tpo -c -o libutype_la-cbuf.lo `test -f 'cbuf.c' || echo '$(srcdir)/'`cbuf.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libutype_la-cbuf.Tpo $(DEPDIR)/libutype_la-cbuf.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cbuf.c' object='libutype_la-cbuf.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libutype_la_CFLAGS) $(CFLAGS) -c -o libutype_la-cbuf.lo `test -f 'cbuf.c' || echo '$(srcdir)/'`cbuf.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
