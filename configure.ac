@@ -13,6 +13,14 @@ LT_INIT
 
 AC_PROG_CC
 
+AC_ARG_WITH(pkgconfigdir,
+	AC_HELP_STRING([--with-pkgconfigdir],
+	[Use the specified pkgconfig dir (default is libdir/pkgconfig)]),
+	[pkgconfigdir=${withval}],
+	[pkgconfigdir='${libdir}/pkgconfig'])
+AC_SUBST([pkgconfigdir])
+AC_MSG_NOTICE([pkgconfig directory is ${pkgconfigdir}])
+
 AC_CONFIG_FILES([libutype.pc])
 
 AC_OUTPUT(Makefile src/Makefile test/Makefile)
