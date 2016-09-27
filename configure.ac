@@ -13,5 +13,7 @@ LT_INIT
 
 AC_PROG_CC
 
+AC_CONFIG_FILES([libutype.pc])
+
 AC_OUTPUT(Makefile src/Makefile test/Makefile)
 

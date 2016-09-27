@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+includedir=@includedir@
+libdir=@libdir@
+
+Name: libutype
+Description: Portable micro data types library for C
+Version: @VERSION@
+Cflags: 
+Libs: -lutype
