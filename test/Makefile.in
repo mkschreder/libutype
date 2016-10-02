@@ -77,7 +77,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-check_PROGRAMS = avl$(EXEEXT)
+check_PROGRAMS = avl$(EXEEXT) cbuf$(EXEEXT)
 subdir = test
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/config/depcomp $(top_srcdir)/config/test-driver
@@ -101,6 +101,12 @@ am__v_lt_1 =
 avl_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(avl_CFLAGS) $(CFLAGS) \
 	$(avl_LDFLAGS) $(LDFLAGS) -o $@
+am_cbuf_OBJECTS = cbuf-cbuf.$(OBJEXT)
+cbuf_OBJECTS = $(am_cbuf_OBJECTS)
+cbuf_LDADD = $(LDADD)
+cbuf_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(cbuf_CFLAGS) $(CFLAGS) \
+	$(cbuf_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -135,8 +141,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(avl_SOURCES)
-DIST_SOURCES = $(avl_SOURCES)
+SOURCES = $(avl_SOURCES) $(cbuf_SOURCES)
+DIST_SOURCES = $(avl_SOURCES) $(cbuf_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -493,6 +499,9 @@ top_srcdir = @top_srcdir@
 avl_SOURCES = avl.c
 avl_CFLAGS = $(CODE_COVERAGE_CFLAGS) -I../src/ -std=c99 
 avl_LDFLAGS = $(CODE_COVERAGE_LDFLAGS) -L../src/.libs -lutype -lm
+cbuf_SOURCES = cbuf.c
+cbuf_CFLAGS = $(CODE_COVERAGE_CFLAGS) -I../src/ -std=c99 
+cbuf_LDFLAGS = $(CODE_COVERAGE_LDFLAGS) -L../src/.libs -lutype -lm
 TESTS = $(check_PROGRAMS)
 all: all-am
 
@@ -542,6 +551,10 @@ avl$(EXEEXT): $(avl_OBJECTS) $(avl_DEPENDENCIES) $(EXTRA_avl_DEPENDENCIES)
 	@rm -f avl$(EXEEXT)
 	$(AM_V_CCLD)$(avl_LINK) $(avl_OBJECTS) $(avl_LDADD) $(LIBS)
 
+cbuf$(EXEEXT): $(cbuf_OBJECTS) $(cbuf_DEPENDENCIES) $(EXTRA_cbuf_DEPENDENCIES) 
+	@rm -f cbuf$(EXEEXT)
+	$(AM_V_CCLD)$(cbuf_LINK) $(cbuf_OBJECTS) $(cbuf_LDADD) $(LIBS)
+
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -549,6 +562,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/avl-avl.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cbuf-cbuf.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -584,6 +598,20 @@ avl-avl.obj: avl.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='avl.c' object='avl-avl.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(avl_CFLAGS) $(CFLAGS) -c -o avl-avl.obj `if test -f 'avl.c'; then $(CYGPATH_W) 'avl.c'; else $(CYGPATH_W) '$(srcdir)/avl.c'; fi`
+
+cbuf-cbuf.o: cbuf.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cbuf_CFLAGS) $(CFLAGS) -MT cbuf-cbuf.o -MD -MP -MF $(DEPDIR)/cbuf-cbuf.Tpo -c -o cbuf-cbuf.o `test -f 'cbuf.c' || echo '$(srcdir)/'`cbuf.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/cbuf-cbuf.Tpo $(DEPDIR)/cbuf-cbuf.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cbuf.c' object='cbuf-cbuf.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cbuf_CFLAGS) $(CFLAGS) -c -o cbuf-cbuf.o `test -f 'cbuf.c' || echo '$(srcdir)/'`cbuf.c
+
+cbuf-cbuf.obj: cbuf.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cbuf_CFLAGS) $(CFLAGS) -MT cbuf-cbuf.obj -MD -MP -MF $(DEPDIR)/cbuf-cbuf.Tpo -c -o cbuf-cbuf.obj `if test -f 'cbuf.c'; then $(CYGPATH_W) 'cbuf.c'; else $(CYGPATH_W) '$(srcdir)/cbuf.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/cbuf-cbuf.Tpo $(DEPDIR)/cbuf-cbuf.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='cbuf.c' object='cbuf-cbuf.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cbuf_CFLAGS) $(CFLAGS) -c -o cbuf-cbuf.obj `if test -f 'cbuf.c'; then $(CYGPATH_W) 'cbuf.c'; else $(CYGPATH_W) '$(srcdir)/cbuf.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -787,6 +815,13 @@ recheck: all $(check_PROGRAMS)
 avl.log: avl$(EXEEXT)
 	@p='avl$(EXEEXT)'; \
 	b='avl'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+cbuf.log: cbuf$(EXEEXT)
+	@p='cbuf$(EXEEXT)'; \
+	b='cbuf'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
