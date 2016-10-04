@@ -16,8 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef __LIBUBOX_UTILS_H
-#define __LIBUBOX_UTILS_H
+#pragma once
 
 //#include <sys/types.h>
 #include <stdint.h>
@@ -38,6 +37,12 @@
 void *__calloc_a(size_t len, ...);
 
 #ifndef container_of
+#if 0
+// this is original implementation
+#define container_of(ptr, type, member) ({                      \
+        const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
+		        (type *)( (char *)__mptr - offsetof(type,member) );})
+#endif
 #define container_of(ptr, type, member)					\
 	({								\
 		(type *) (void*)((char*) (ptr) - offsetof(type, member));	\
@@ -182,4 +187,3 @@ static inline bool bitfield_test(unsigned long *bits, int bit)
 	return !!(bits[bit / BITS_PER_LONG] & (1UL << (bit % BITS_PER_LONG)));
 }
 
-#endif
